@@ -39,7 +39,7 @@ def connect_to_server_auto():
 if __name__ == '__main__':
     # Main line for program
     # Create 20 tasks that send messages to the server
-    for x in range(0, 200):
+    for x in range(0, int(sys.argv[1])):
         client_thread_pool.add_task(
             connect_to_server_auto
         )

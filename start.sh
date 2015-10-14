@@ -1,4 +1,4 @@
 #!/bin/bash
 
 #runs the server program
-python TCPServer.py
+python TCPServer.py $1
