@@ -2,6 +2,9 @@ import socket
 import sys
 import threadpool
 
+# this is a multithreaded client program that was used to test
+# the server code
+
 client_thread_pool = threadpool.ThreadPool(20)
 
 def connect_to_server_userin():
@@ -18,7 +21,7 @@ def connect_to_server_userin():
 
     sock.close()
 
-#Sends test from the client
+# Sends test from the client
 def connect_to_server_auto():
     user_in = "test message\n"
 
@@ -34,8 +37,8 @@ def connect_to_server_auto():
     sock.close()
 
 if __name__ == '__main__':
-    #Main line for program
-    #Create 20 tasks that send messages to the server
+    # Main line for program
+    # Create 20 tasks that send messages to the server
     for x in range(0, 200):
         client_thread_pool.add_task(
             connect_to_server_auto
