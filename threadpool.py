@@ -1,3 +1,5 @@
+# Downloaded from http://code.activestate.com/recipes/577187-python-thread-pool/
+
 from Queue import Queue
 from threading import Thread
 

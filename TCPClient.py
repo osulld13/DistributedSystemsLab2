@@ -2,10 +2,18 @@ import socket
 import sys
 import threadpool
 
+from random import randint
+
 # this is a multithreaded client program that was used to test
 # the server code
 
 client_thread_pool = threadpool.ThreadPool(20)
+
+messages = [
+    "HELO\n",
+    "HELO tesasdfasdft \n",
+    "KILL_SERVICE\n",
+]
 
 def connect_to_server_userin():
     user_in = raw_input("input your message:\n>> ")
@@ -23,17 +31,22 @@ def connect_to_server_userin():
 
 # Sends test from the client
 def connect_to_server_auto():
-    user_in = "test message\n"
+    # Send random message from global list of messages
+    message = messages[randint(0, 2)]
 
+    # create socket
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_address = ("localhost", 8000)
     sock.connect(server_address)
 
-    sock.send(user_in)
+    # send message
+    sock.send(message)
 
+    # receive and print response
     data = sock.recv(1024)
     print data
 
+    # close socket
     sock.close()
 
 if __name__ == '__main__':
@@ -43,3 +56,5 @@ if __name__ == '__main__':
         client_thread_pool.add_task(
             connect_to_server_auto
         )
+    # wait for threads to complete before finishing program
+    client_thread_pool.wait_completion()

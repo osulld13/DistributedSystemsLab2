@@ -1,9 +1,12 @@
 import sys
 import socket
 import threadpool
+import os
 
 # global threadpool for server
 server_thread_pool = threadpool.ThreadPool(40)
+
+port_num = int(sys.argv[1])
 
 # get local ip with following function
 # socket.gethostbyname(socket.gethostname())
@@ -11,7 +14,7 @@ server_thread_pool = threadpool.ThreadPool(40)
 def create_server_socket():
     # create socket  and initialise to localhost:8000
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server_address = ("localhost", 8000)
+    server_address = ("localhost", port_num)
 
     print "starting up on %s port %s\n" % server_address
 
@@ -33,13 +36,26 @@ def create_server_socket():
 
 def start_client_interaction(connection, client_address):
     try:
-        data = connection.recv(16)
+        data = connection.recv(1024)
         print "received message: %s" % data
-        print "sending back message"
-        connection.sendall("message received")
+
+        # Respond to the appropriate message
+        if data == "KILL_SERVICE\n":
+            # Empty task queue if kill command is given
+            os._exit(0)
+        elif data[0:4] == "HELO" and data[-1] == '\n':
+            # Respond to HELO message
+            # Construct the appropriate response
+            response = data
+            response += "IP:[" + socket.gethostbyname(socket.gethostname()) + "]\n"
+            response += "Port:[" + str(port_num) +"]\n"
+            response += "StudnetID:[12308492]\n"
+            connection.sendall("%s" % response)
 
     finally:
         connection.close()
 
 if __name__ == '__main__':
     create_server_socket()
+    #wait for threads to complete
+    server_thread_pool.wait_completion()
