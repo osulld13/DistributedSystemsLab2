@@ -8,9 +8,6 @@ server_thread_pool = threadpool.ThreadPool(40)
 
 port_num = int(sys.argv[1])
 
-# get local ip with following function
-# socket.gethostbyname(socket.gethostname())
-
 def create_server_socket():
     # create socket  and initialise to localhost:8000
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
