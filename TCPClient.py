@@ -14,8 +14,8 @@ messages = [
     "HELO\n",
     "HELO tesasdfasdft \n",
     "KILL_SERVICE\n",
-    "A message for testing",
-    "Another message for testing",
+    "A message for testing\n",
+    "Another message for testing\n",
 ]
 
 def connect_to_server_userin():
