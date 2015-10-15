@@ -50,7 +50,7 @@ def start_client_interaction(connection, client_address):
             response = data
             response += "IP:[" + socket.gethostbyname(socket.gethostname()) + "]\n"
             response += "Port:[" + str(port_num) +"]\n"
-            response += "StudnetID:[12308492]\n"
+            response += "StudentID:[12308492]\n"
             connection.sendall("%s" % response)
 
     finally:
