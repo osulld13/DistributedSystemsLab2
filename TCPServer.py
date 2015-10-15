@@ -47,7 +47,7 @@ def start_client_interaction(connection, client_address):
             response = data
             response += "IP:[" + socket.gethostbyname(socket.gethostname()) + "]\n"
             response += "Port:[" + str(port_num) +"]\n"
-            response += "StudentID:[12308492]\n"
+            response += "StudentID:[a09577ec2fe97c36c854f4010526ed2f81b4747edea7d4247ded8c32f76e93f2]\n"
             connection.sendall("%s" % response)
 
     finally:
@@ -55,5 +55,5 @@ def start_client_interaction(connection, client_address):
 
 if __name__ == '__main__':
     create_server_socket()
-    #wait for threads to complete
+    # wait for threads to complete
     server_thread_pool.wait_completion()
