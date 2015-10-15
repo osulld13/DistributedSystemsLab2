@@ -9,10 +9,13 @@ from random import randint
 
 client_thread_pool = threadpool.ThreadPool(20)
 
+# A list containing a series of potential server messages for testing
 messages = [
     "HELO\n",
     "HELO tesasdfasdft \n",
     "KILL_SERVICE\n",
+    "A message for testing",
+    "Another message for testing",
 ]
 
 def connect_to_server_userin():
@@ -32,7 +35,7 @@ def connect_to_server_userin():
 # Sends test from the client
 def connect_to_server_auto():
     # Send random message from global list of messages
-    message = messages[randint(0, 2)]
+    message = messages[randint(0, 4)]
 
     # create socket
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

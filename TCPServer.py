@@ -23,7 +23,6 @@ def create_server_socket():
     sock.listen(1)
 
     while True:
-        print "waiting for a connection\n"
         # sock.accept returns a 2 element tuple
         connection, client_address = sock.accept()
         # Hand the client interaction off to a seperate thread
@@ -41,7 +40,9 @@ def start_client_interaction(connection, client_address):
 
         # Respond to the appropriate message
         if data == "KILL_SERVICE\n":
-            # Empty task queue if kill command is given
+            # Kill service
+            response = "Killing Service\n"
+            connection.sendall("%s" % response)
             os._exit(0)
         elif data[0:4] == "HELO" and data[-1] == '\n':
             # Respond to HELO message
