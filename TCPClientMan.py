@@ -9,7 +9,7 @@ from random import randint
 
 client_thread_pool = threadpool.ThreadPool(20)
 
-port_num = int(sys.argv[2])
+port_num = int(sys.argv[1])
 
 # A list containing a series of potential server messages for testing
 messages = [
@@ -57,9 +57,10 @@ def connect_to_server_auto():
 if __name__ == '__main__':
     # Main line for program
     # Create 20 tasks that send messages to the server
-    for x in range(0, int(sys.argv[1])):
-        client_thread_pool.add_task(
-            connect_to_server_auto
-        )
+    # for x in range(0, int(sys.argv[1])):
+    #    client_thread_pool.add_task(
+    #        connect_to_server_auto
+    #    )
     # wait for threads to complete before finishing program
+    connect_to_server_userin()
     client_thread_pool.wait_completion()

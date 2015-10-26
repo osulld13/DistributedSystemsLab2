@@ -12,3 +12,5 @@ Running and Testing:
 
 Other info:
   - The threadpool module was downloaded from http://code.activestate.com/recipes/577187-python-thread-pool/
+  - The test server ip is 46.101.47.238
+  - The TCPServer program is running on port 9800

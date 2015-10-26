@@ -11,7 +11,7 @@ port_num = int(sys.argv[1])
 def create_server_socket():
     # create socket  and initialise to localhost:8000
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server_address = ("localhost", port_num)
+    server_address = ('', port_num)
 
     print "starting up on %s port %s\n" % server_address
 
@@ -22,6 +22,18 @@ def create_server_socket():
     while True:
         # sock.accept returns a 2 element tuple
         connection, client_address = sock.accept()
+        #print "Connection from %s, %s\n" % connection, client_address
+        # Hand the client interaction off to a seperate thread
+        server_thread_pool.add_task(
+            start_client_interaction,
+            connection,
+            client_address
+        )
+
+    while True:
+        # sock.accept returns a 2 element tuple
+        connection, client_address = sock.accept()
+        #print "Connection from %s, %s\n" % connection, client_address
         # Hand the client interaction off to a seperate thread
         server_thread_pool.add_task(
             start_client_interaction,
